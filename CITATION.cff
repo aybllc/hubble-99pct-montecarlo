@@ -1,19 +1,25 @@
 cff-version: 1.2.0
-message: "If you use this dataset, please cite it as below."
+message: "If you use this software, please cite both the software and the archived dataset."
+type: software
+title: "Monte Carlo Calibrated Measurement Contexts"
+abstract: "Full resolution of Hubble Tension (99.8% concordance) through empirical tensor calibration using Monte Carlo MCMC chain analysis."
 authors:
-  - family-names: Martin
-    given-names: Eric D.
-    email: eric.martin1@wsu.edu
-    affiliation: Washington State University, Vancouver
-title: "Monte Carlo Calibrated Observer Tensors for Hubble Tension Resolution (Package 2)"
-version: 1.0.0
-date-released: 2025-10-11
-license: MIT
-repository-code: "https://github.com/edmartin/hubble-montecarlo"
+  - family-names: "Martin"
+    given-names: "Eric D."
+    email: "eric.martin1@wsu.edu"
+    affiliation: "Washington State University, Vancouver"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.17325811
+    description: "Zenodo archive of complete dataset and code"
+repository-code: "https://github.com/aybllc/hubble-99pct-montecarlo"
 keywords:
-  - cosmology
-  - Hubble tension
-  - observer tensors
-  - uncertainty quantification
-  - N/U algebra
-  - MCMC calibration
+  - "Hubble tension"
+  - "cosmology"
+  - "Monte Carlo"
+  - "MCMC"
+  - "observer domain tensors"
+  - "measurement contexts"
+license: MIT
+version: "1.0.0"
+date-released: "2025-10-24"
