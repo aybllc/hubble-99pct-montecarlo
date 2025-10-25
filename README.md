@@ -38,8 +38,7 @@ python -c "import json; print(json.dumps(json.load(open('validation_results/fina
 ## Contact
 
 Eric D. Martin
-eric.martin1@wsu.edu
-Washington State University, Vancouver
+catch@aybllc.org
 
 ## License
 
