@@ -14,7 +14,7 @@ from pathlib import Path
 from scipy import stats
 
 
-class ObserverTensor:
+class MeasurementContext:
     """Observer domain tensor [P_m, 0_t, 0_m, 0_a]."""
 
     def __init__(self, P_m, zero_t, zero_m, zero_a):
@@ -31,8 +31,8 @@ class ObserverTensor:
             'zero_a': float(self.zero_a)
         }
 
-    def epistemic_distance(self, other):
-        """Calculate Δ_T between two observer tensors."""
+    def calculate_separation(self, other):
+        """Calculate separation between measurement contexts."""
         delta_P_m = abs(self.P_m - other.P_m)
         delta_zero_t = abs(self.zero_t - other.zero_t)
         delta_zero_m = abs(self.zero_m - other.zero_m)
@@ -67,7 +67,7 @@ def extract_tensor_from_chain(chain, method_type):
 
     Returns:
     --------
-    ObserverTensor
+    MeasurementContext
     """
     H0_mean = chain['H0'].mean()
     H0_std = chain['H0'].std()
@@ -126,7 +126,7 @@ def extract_tensor_from_chain(chain, method_type):
     else:
         raise ValueError(f"Unknown method type: {method_type}")
 
-    return ObserverTensor(P_m, zero_t, zero_m, zero_a)
+    return MeasurementContext(P_m, zero_t, zero_m, zero_a)
 
 
 def merge_groups_with_tensors(early_group, late_group, delta_T):
@@ -161,7 +161,7 @@ def refine_tensor_iteratively(tensor, chain, method_type, learning_rate=0.15):
 
     Parameters:
     -----------
-    tensor : ObserverTensor
+    tensor : MeasurementContext
         Current tensor estimate
     chain : pd.DataFrame
         MCMC chain for validation
@@ -179,7 +179,7 @@ def refine_tensor_iteratively(tensor, chain, method_type, learning_rate=0.15):
     zero_m_refined = tensor.zero_m + learning_rate * (new_tensor.zero_m - tensor.zero_m)
     zero_a_refined = tensor.zero_a + learning_rate * (new_tensor.zero_a - tensor.zero_a)
 
-    return ObserverTensor(P_m_refined, zero_t_refined, zero_m_refined, zero_a_refined)
+    return MeasurementContext(P_m_refined, zero_t_refined, zero_m_refined, zero_a_refined)
 
 
 def iterative_extraction_pipeline(chains, output_dir, n_iterations=6, learning_rate=0.15):
@@ -217,8 +217,8 @@ def iterative_extraction_pipeline(chains, output_dir, n_iterations=6, learning_r
         print(f"\nIteration {iteration}: ", end='')
 
         # Compute epistemic distances
-        delta_T_planck_shoes, components_ps = planck_tensor.epistemic_distance(shoes_tensor)
-        delta_T_des_shoes, components_ds = des_tensor.epistemic_distance(shoes_tensor)
+        delta_T_planck_shoes, components_ps = planck_tensor.calculate_separation(shoes_tensor)
+        delta_T_des_shoes, components_ds = des_tensor.calculate_separation(shoes_tensor)
 
         # Use weighted average for combined early-universe tensor
         delta_T = 0.6 * delta_T_planck_shoes + 0.4 * delta_T_des_shoes

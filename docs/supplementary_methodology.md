@@ -1,6 +1,6 @@
 # Supplementary Methodology
 
-**Monte Carlo Calibrated Observer Tensors for Hubble Tension Resolution**
+**Monte Carlo Calibrated Measurement Contexts for Hubble Tension Resolution**
 
 Author: Eric D. Martin
 Email: eric.martin1@wsu.edu
@@ -87,7 +87,7 @@ Weaker correlation than CMB since BAO constrains $\Omega_m$ more directly.
 
 ## Tensor Extraction Algorithms
 
-### Observer Tensor Structure
+### Measurement Context Structure
 
 An observer domain tensor has four components:
 ```

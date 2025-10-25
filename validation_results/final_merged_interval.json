@@ -44,7 +44,7 @@
       "shoes": 1.0
     }
   },
-  "epistemic_distance": {
+  "calculate_separation": {
     "delta_T": 0.6254790314389393,
     "components": {
       "delta_P_m": -0.02674060537339884,

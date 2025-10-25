@@ -188,7 +188,7 @@ def generate_final_merged_interval(tensor_file, output_dir):
                 'shoes': 1.0
             }
         },
-        'epistemic_distance': {
+        'calculate_separation': {
             'delta_T': final_iter['delta_T'],
             'components': components
         },
